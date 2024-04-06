@@ -8,7 +8,7 @@ const router = express.Router();
 router.post('/', async (request,response) => {
     try {
         // to make sure all the post data is available
-        if (!request.body.title || !request.body.author || !request.body.publishYear) {
+        if (!request.body.title || !request.body.author || !request.body.publishYear || !request.body.shortDescription) {
             return response.status(400).send ({
                 message: 'Send all the required fields: title, author, publishYear',
             })
@@ -17,6 +17,7 @@ router.post('/', async (request,response) => {
         // create the book according to the schema 
         const newBook = {
             title: request.body.title,
+            shortDescription: request.body.shortDescription,
             author: request.body.author,
             publishYear: request.body.publishYear
         }
@@ -65,7 +66,7 @@ router.get('/:id', async(request, response) => {
 // Route to update a book from db
 router.put('/:id', async(request, response) => {
     try {
-        if (!request.body.title || !request.body.author || !request.body.publishYear) {
+        if (!request.body.title || !request.body.author || !request.body.publishYear || !request.body.shortDescription  ) {
             return response.status(400).send( {
                 message: 'Send all the required fields: title, author, publishYear'
             });
